@@ -20,7 +20,7 @@ w2v_model = gensim.models.Word2Vec.load("word2vec_embed.model")
 
 app = Flask(__name__)
 
-api_key = "AIzaSyDRG4JAdV_Z0OLMbUVwhPAq89HW_uqwvG0"
+api_key = ""
 youtube = build('youtube', 'v3', developerKey=api_key)
 adaboost = pickle.load(open('trained_model_ada.pkl', 'rb'))
 # cnn = tf.keras.sav.load_model('best_model_cnn.h5', custom_objects={'KerasLayer': hub.KerasLayer})
