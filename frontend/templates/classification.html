@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Video Information</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; /* This aligns everything vertically */
+        height: 100vh;
+    }
+    table {
+        border-collapse: collapse;
+        width: 60%; /* Adjust based on your preference */
+        margin-top: 20px;
+        padding-left: 20px; /* Adds padding on the left side of the table */
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        width: 50%;
+    }
+    td {
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+    }
+    .thumbnail-section {
+        padding: 20px;
+        text-align: center;
+        width: 60%; /* Adjust based on your preference */
+    }
+    .thumbnail-section img {
+        width: auto; /* Adjust based on your preference */
+        max-height: 300px; /* Adjust based on your preference */
+    }
+    .thumbnail-header {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+    }
+    .home-button {
+        position: absolute; /* Positioning relative to the nearest positioned ancestor or to the initial containing block */
+        top: 10px; /* Space from the top */
+        left: 10px; /* Space from the left */
+        padding: 10px 20px; /* Padding inside the button */
+        font-size: 16px; /* Text size inside the button */
+        background-color: #f8f8f8; /* Background color of the button */
+        border: 1px solid #ccc; /* Border properties */
+        border-radius: 5px; /* Rounded corners */
+    }
+</style>
+</head>
+<body>
+    <a href="/" class="home-button">Return Home</a>
+    <table>
+        <tr>
+            <th>Title</th>
+            <td>{{ video_data.video_title }}</td>
+        </tr>
+        <tr>
+            <th>URL</th>
+            <td>{{ video_data.url }}</td>
+        </tr>
+        <tr>
+            <th>Video ID</th>
+            <td>{{ video_data.videoID }}</td>
+        </tr>
+        <tr>
+            <th>Duration (s)</th>
+            <td>{{ video_data.duration }}</td>
+        </tr>
+        {% if video_data.like_count %}
+        <tr>
+            <th>Likes</th>
+            <td>{{ video_data.like_count }}</td>
+        </tr>
+        {% endif %}
+        {% if video_data.comment_count %}
+        <tr>
+            <th>Comments</th>
+            <td>{{ video_data.comment_count }}</td>
+        </tr>
+        {% endif %}
+        {% if video_data.view_count %}
+        <tr>
+            <th>Views</th>
+            <td>{{ video_data.view_count }}</td>
+        </tr>
+        {% endif %}
+    </table>
+    <div class="thumbnail-section">
+        <div class="thumbnail-header">Video Thumbnail</div>
+        <img src="{{ video_data.thumbnail_link.url }}" alt="Video Thumbnail">
+    </div>
+    <div>
+        <div class="thumbnail-header">
+            {% if classification %}
+                Classification: <b>Clickbait</b>
+            {% else %}
+                Classification: <b>Not Clickbait</b>
+            {% endif %}
+        </div>
+        
+    </div>
+</body>
+</html>

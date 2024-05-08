@@ -1,0 +1,62 @@
+/* Reset some basic elements */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* Simple styling for the body */
+body {
+    display: flex;
+    flex-direction: column; /* Aligns items vertically */
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Container styling for vertical layout */
+.container {
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgb(172, 172, 172);
+    width: fit-content;
+    margin: auto;
+}
+
+/* Input field styling */
+input[type="url"] {
+    width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #1a73e8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0c59c8;
+}
+
+/* Adjusted header styles for project info */
+header {
+    margin-bottom: 20px; /* Adds spacing between the header and the search box */
+}
+
+/* Styles for titles and subtitles */
+.title, .subtitle {
+    margin: 5px 0; /* Add space between titles and subtitle */
+}
