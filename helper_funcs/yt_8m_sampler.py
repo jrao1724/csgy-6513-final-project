@@ -3,7 +3,10 @@ from googleapiclient.discovery import build
 import pandas as pd
 from pprint import pprint
 
-api_key = "AIzaSyDRG4JAdV_Z0OLMbUVwhPAq89HW_uqwvG0"
+# VID IDs SAMPLED FROM YOUTUBE_8M.txt FILE
+# NOT COMMITED TO GITHUB DUE TO LARGE FILE SIZE
+
+api_key = ""
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 def check_availability(vid_id):
