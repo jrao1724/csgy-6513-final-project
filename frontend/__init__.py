@@ -23,7 +23,6 @@ app = Flask(__name__)
 api_key = ""
 youtube = build('youtube', 'v3', developerKey=api_key)
 adaboost = pickle.load(open('trained_model_ada.pkl', 'rb'))
-# cnn = tf.keras.sav.load_model('best_model_cnn.h5', custom_objects={'KerasLayer': hub.KerasLayer})
 
 cnn = keras.models.load_model("best_model_mv2.keras")
 image_processor = ImageDataGenerator(rescale=1./255)
@@ -66,37 +65,10 @@ def title_to_vector(title):
     vectors = [w2v_model.wv[word] for word in title if word in w2v_model.wv]
     return np.mean(vectors, axis=0) if vectors else np.zeros(w2v_model.vector_size)
 
-
-def fetch_video_info(yt_obj, vid_id):
-    
-    video_info_req = yt_obj.videos().list(
-        part='snippet,contentDetails,statistics',
-        id=vid_id
-    )
-
-    video_info_res = video_info_req.execute()
-    return 
-
-def weighted_avg(pred_cnn, pred_ada):
-    adaboost_clickbait_prob = np.max(pred_ada, axis=1)
-    cnn_clickbait_prob = pred_cnn
-    
-    # Confidence measures based on distance from the decision boundary (0.5)
-    confidence_cnn = abs(cnn_clickbait_prob - 0.5) * 2
-    confidence_adaboost = abs(adaboost_clickbait_prob - 0.5) * 2
-
-    # Calculate dynamic weights
-    total_confidence = confidence_cnn + confidence_adaboost
-    weight_cnn = confidence_cnn / total_confidence
-    weight_adaboost = confidence_adaboost / total_confidence
-    
-    return weight_cnn, weight_adaboost
-
 def custom_weights(cnn_prob, threshold=0.95, base_weight_adaboost=0.95, base_weight_cnn=0.05):
     # Apply dynamic adjustment based on CNN confidence
     if cnn_prob > threshold:
-        # Increase CNN weight when super confident
-        weight_cnn = 0.7  # More weight to CNN when it's highly confident
+        weight_cnn = 0.7 
         weight_adaboost = 0.3
     else:
         # Default weights
